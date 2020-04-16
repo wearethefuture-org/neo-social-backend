@@ -1,0 +1,42 @@
+{
+  "local": {
+    "username": "postgres",
+    "password": "Test1234",
+    "database": "social",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "migrationStorageTableName": "sequelize_meta",
+    "migrationStorageTableSchema": "sequelize_schema",
+    "logging": true
+  },
+  "test": {
+    "username": "postgres",
+    "password": 12321,
+    "database": "test",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "migrationStorageTableName": "sequelize_meta",
+    "migrationStorageTableSchema": "sequelize_schema",
+    "logging": true
+  },
+  "production": {
+    "username": "postgres",
+    "password": 12321,
+    "database": "test",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "migrationStorageTableName": "sequelize_meta",
+    "migrationStorageTableSchema": "sequelize_schema",
+    "logging": true
+  },
+  "development": {
+    "username": "postgres",
+    "password": "Test1234",
+    "database": "social",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "migrationStorageTableName": "sequelize_meta",
+    "migrationStorageTableSchema": "sequelize_schema",
+    "logging": true
+  }
+}
