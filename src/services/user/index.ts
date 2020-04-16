@@ -33,7 +33,6 @@ export class UserService extends BaseModelService {
       where: {
         email
       }
-      // raw: true
     });
   }
 

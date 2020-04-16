@@ -46,7 +46,7 @@ export class AuthService extends BaseModelService {
 
             UserService.checkExistUser(!!dbUser);
 
-            user.password = await bcrypt.hash(user.password, +process.env.saltRounds);
+            user.password = await bcrypt.hash(user.password, +process.env.SALT_ROUNDS);
             const createdUser: IUser = (await userService.createUser(user)).dataValues;
             const dataSendMail = await mailService.generateDataMail(createdUser.id, createdUser.firstName, createdUser.email);
 
