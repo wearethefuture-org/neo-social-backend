@@ -36,7 +36,7 @@ export class MailService {
         });
 
         return  {
-            from: `${process.env.SMTP_AUTH_USER}`,
+            from: `Open Social Network<noreply.${process.env.SMTP_AUTH_USER}>`,
             to: toMail,
             subject: 'Email confirmation',
             text: 'confirm your email',

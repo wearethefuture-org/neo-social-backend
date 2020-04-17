@@ -68,7 +68,7 @@ export class AuthService extends BaseModelService {
 
             if (userKey) {
                 await userService.updateUser(id, {status: USER_STATUS.confirmed});
-                userKeysService.deleteUserKey(userKey.id);
+                await userKeysService.deleteUserKey(userKey.id);
 
                 return true;
             }

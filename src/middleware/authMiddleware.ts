@@ -15,12 +15,13 @@ export const authMiddleware = async (ctx: any, next: any) => {
               const { url, method } = ctx.request;
               let routeGuared = true;
 
-              unauthorizedUrls.forEach(route => {
-                     const regexp = match(route.url, {decode: decodeURIComponent});
-                     if (method === route.method && !regexp(url)) {
+              for (let i = 0; i < unauthorizedUrls.length; i++) {
+                     const regexp = match(unauthorizedUrls[i].url, {decode: decodeURIComponent});
+                     if (method === unauthorizedUrls[i].method && !regexp(url)) {
                             routeGuared = false;
+                            break;
                      }
-              });
+              }
 
               if (!routeGuared) {
                      await next();
