@@ -14,17 +14,11 @@ export class UserService extends BaseModelService {
     return this.model.users.findAll({});
   }
 
-  async getUser(id: string): Promise<void> {
+  async getUser(id: number): Promise<any> {
     return this.model.users.findOne({
       where: {
         id
-      },
-      include: [
-        {
-          model: this.model.files,
-          as: this.aliases.users.files
-        }
-      ]
+      }
     });
   }
 

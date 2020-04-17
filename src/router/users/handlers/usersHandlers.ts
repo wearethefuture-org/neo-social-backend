@@ -1,5 +1,4 @@
 import { UserService } from '../../../services/user';
-// const StorageService = require('../../../services/storage');
 
 export const createUser = async (ctx: any): Promise<void> => {
   try {
