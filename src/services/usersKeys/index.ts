@@ -12,7 +12,7 @@ export class UsersKeysService extends BaseModelService {
         return this.model.usersKeys.create(body);
     }
 
-    async getUserKey(key: string): Promise<IUserKey> {
+    async getUserKey(key: string, id: number): Promise<IUserKey> {
         return this.model.usersKeys.findOne({
             where: {
                 key

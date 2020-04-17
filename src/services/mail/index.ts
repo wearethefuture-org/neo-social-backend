@@ -26,17 +26,17 @@ export class MailService {
         });
     }
 
-    public async generateDataMail(id: number, name: string, toMail: string): Promise<IDataMail> {
+    public async generateDataRegMail(id: number, name: string, toMail: string): Promise<IDataMail> {
         const userKeysService = new UsersKeysService();
         const renderHTMLService = new RenderHTMLService();
-        const key = await userKeysService.createUserKey(id);
+        const userByKey = await userKeysService.createUserKey(id);
         const html = await renderHTMLService.render('confirmEmail', {
-            url: `${process.env.FRONT_URL}:${process.env.FRONT_PORT}/auth/confirm/${key.key}`,
+            url: `${process.env.FRONT_URL}:${process.env.FRONT_PORT}/auth/confirm/?key=${userByKey.key}&id=${id}`,
             name
         });
 
         return  {
-            from: `Open Social Network<noreply.${process.env.SMTP_AUTH_USER}>`,
+            from: `${process.env.SMTP_AUTH_USER}`,
             to: toMail,
             subject: 'Email confirmation',
             text: 'confirm your email',

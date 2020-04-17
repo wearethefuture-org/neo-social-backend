@@ -1,4 +1,4 @@
-export const authUrls = [
+export const unauthorizedUrls = [
     {
         url: '/api/v1/login',
         method: 'POST'

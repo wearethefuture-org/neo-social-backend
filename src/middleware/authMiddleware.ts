@@ -1,9 +1,10 @@
-import { authUrls } from '../enums/Urls';
+import { unauthorizedUrls } from '../enums/Urls';
 import { USER_STATUS } from '../enums/users/constants';
 import { passport } from '../services/passport';
 import { HttpError } from '../utils/httpError';
 
 import { match } from 'path-to-regexp';
+
 
 export const authMiddleware = async (ctx: any, next: any) => {
        await passport.authenticate('jwt', { session: false }, async (err: Error, user: any) => {
@@ -12,13 +13,12 @@ export const authMiddleware = async (ctx: any, next: any) => {
               }
 
               const { url, method } = ctx.request;
-              let routeGuared = false;
+              let routeGuared = true;
 
-              authUrls.forEach(route => {
+              unauthorizedUrls.forEach(route => {
                      const regexp = match(route.url, {decode: decodeURIComponent});
-
-                     if (method === route.method && regexp(url)) {
-                            routeGuared = true;
+                     if (method === route.method && !regexp(url)) {
+                            routeGuared = false;
                      }
               });
 

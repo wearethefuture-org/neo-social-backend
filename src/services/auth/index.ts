@@ -6,6 +6,7 @@ import { BaseModelService } from '../baseModel';
 import { MailService } from '../mail';
 import { TokenService } from '../token';
 import { UserService } from '../user';
+import { UsersKeysService } from '../usersKeys';
 
 export class AuthService extends BaseModelService {
 
@@ -47,7 +48,7 @@ export class AuthService extends BaseModelService {
 
             user.password = await bcrypt.hash(user.password, +process.env.SALT_ROUNDS);
             const createdUser: IUser = (await userService.createUser(user)).dataValues;
-            const dataSendMail = await mailService.generateDataMail(createdUser.id, createdUser.firstName, createdUser.email);
+            const dataSendMail = await mailService.generateDataRegMail(createdUser.id, createdUser.firstName, createdUser.email);
 
             mailService.sendMail(dataSendMail);
 
@@ -59,13 +60,15 @@ export class AuthService extends BaseModelService {
         }
     }
 
-    async confirmRegistration(id: number): Promise<boolean> {
+    async confirmRegistration(id: number, key: string): Promise<boolean> {
         try {
+            const userKeysService = new UsersKeysService();
             const userService = new UserService();
-            const user = await userService.getUser(id);
+            const userKey = await userKeysService.getUserKey(key, id);
 
-            if (user) {
+            if (userKey) {
                 await userService.updateUser(id, {status: USER_STATUS.confirmed});
+                userKeysService.deleteUserKey(userKey.id);
 
                 return true;
             }

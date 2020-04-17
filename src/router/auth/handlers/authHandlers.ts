@@ -24,8 +24,11 @@ export const register = async (ctx: any): Promise<void> => {
 };
 
 export const confirmRegistration = async (ctx: any): Promise<void> => {
-    const authService = new AuthService();
-    const { id } = ctx.request.body;
-
-    ctx.response.body = await authService.confirmRegistration(id);
+    try {
+        const authService = new AuthService();
+        const { id, key } = ctx.request.body;
+        ctx.response.body = await authService.confirmRegistration(id, key);
+    } catch (e) {
+        console.log('confirmRegistration', e);
+    }
 };
