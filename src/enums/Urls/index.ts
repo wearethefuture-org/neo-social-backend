@@ -1,5 +1,7 @@
+import {  authUrls } from './authUrls';
 import { passportUrls } from './passport';
 
 export {
-    passportUrls
+    passportUrls,
+    authUrls
 };

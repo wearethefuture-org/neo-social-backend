@@ -1,4 +1,4 @@
-import { passportUrls } from '../enums/Urls';
+import { authUrls } from '../enums/Urls';
 import { USER_STATUS } from '../enums/users/constants';
 import { passport } from '../services/passport';
 import { HttpError } from '../utils/httpError';
@@ -14,18 +14,12 @@ export const authMiddleware = async (ctx: any, next: any) => {
               const { url, method } = ctx.request;
               let routeGuared = false;
 
-              passportUrls.forEach(route => {
-                     if (method !== route.method) {
-                            return;
-                     }
-
+              authUrls.forEach(route => {
                      const regexp = match(route.url, {decode: decodeURIComponent});
 
-                     if (!regexp(url)) {
-                            return;
+                     if (method === route.method && regexp(url)) {
+                            routeGuared = true;
                      }
-
-                     routeGuared = true;
               });
 
               if (!routeGuared) {
@@ -37,6 +31,7 @@ export const authMiddleware = async (ctx: any, next: any) => {
               if (!user) {
                      throw new HttpError(401, 'Unauthorized!' , 'Access denied');
               }
+
               if (user.status !== USER_STATUS.confirmed) {
                      throw new HttpError(401, 'Unconfirmed email!' , 'Access denied');
               }
