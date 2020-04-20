@@ -23,7 +23,7 @@ export class UserService extends BaseModelService {
   }
 
   async getUserByEmail(email: string): Promise<IUser> {
-    return  this.model.users.findOne({
+    return this.model.users.findOne({
       where: {
         email
       }

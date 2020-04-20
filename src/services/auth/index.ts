@@ -19,7 +19,8 @@ export class AuthService extends BaseModelService {
             throw new HttpError(401, 'User is unregistered', 'Access denied');
         }
 
-        if (dbUser.user.status !== USER_STATUS.confirmed) {
+
+        if (dbUser.status !== USER_STATUS.confirmed) {
             throw new HttpError(401, 'User status is not confirmed', 'Access denied');
         }
 
