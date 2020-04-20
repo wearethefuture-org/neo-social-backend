@@ -19,14 +19,13 @@ export class AuthService extends BaseModelService {
             throw new HttpError(401, 'User is unregistered', 'Access denied');
         }
 
-
-        if (dbUser.status !== USER_STATUS.confirmed) {
-            throw new HttpError(401, 'User status is not confirmed', 'Access denied');
-        }
-
         const compared = await bcrypt.compare(user.password, dbUser.password);
 
         if (compared) {
+            if (dbUser.status !== USER_STATUS.confirmed) {
+                throw new HttpError(401, 'User status is not confirmed', 'Access denied');
+            }
+
             delete dbUser.dataValues.password;
             const token = await tokenService.generateToken({user: dbUser.dataValues}, +process.env.TOKEN_TIME);
 
