@@ -56,7 +56,7 @@ export class AuthService extends BaseModelService {
                 status: 200
             };
         } catch (e) {
-            throw new HttpError(500, 'Backend error', 'Access denied');
+            throw new HttpError(500, JSON.stringify(e), 'Access denied');
         }
     }
 
