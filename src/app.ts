@@ -7,11 +7,13 @@ envIndex(`${__dirname}/../`);
 import * as Koa from 'koa';
 import * as koaBody from 'koa-body';
 import * as Router from 'koa-router';
+const cors = require('@koa/cors');
 import { authMiddleware } from './middleware/authMiddleware';
 // tslint:disable-next-line:no-default-import
 import router from './router';
 
 const app = new Koa();
+app.use(cors());
 
 const apiRouter = new Router({ prefix: '/api/v1'});
 apiRouter.use(router);
