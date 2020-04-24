@@ -25,7 +25,8 @@ export default (sequelize: any, DataTypes: any) => {
             },
             userName: {
               type: DataTypes.STRING,
-              allowNull: true,
+              allowNull: false,
+              unique: true,
               field: 'user_name'
             },
             lastName: {
