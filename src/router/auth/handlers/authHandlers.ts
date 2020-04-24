@@ -1,4 +1,5 @@
 import { AuthService } from '../../../services/auth';
+import { HttpServerError } from '../../../utils/httpError';
 
 export const login = async (ctx: any): Promise<void> => {
     try {
@@ -11,8 +12,7 @@ export const login = async (ctx: any): Promise<void> => {
 
         ctx.response.body = await authService.login(user);
     } catch (e) {
-        ctx.response.body = JSON.stringify(e);
-        ctx.response.status = 502;
+        throw new HttpServerError(e);
     }
 };
 
@@ -22,8 +22,7 @@ export const register = async (ctx: any): Promise<void> => {
         const user = ctx.request.body;
         ctx.response.status = (await authService.register(user)).status;
     } catch (e) {
-        ctx.response.body = JSON.stringify(e);
-        ctx.response.status = 500;
+        throw new HttpServerError(e);
     }
 
 };
@@ -34,6 +33,6 @@ export const confirmRegistration = async (ctx: any): Promise<void> => {
         const { id, key } = ctx.request.body;
         ctx.response.body = await authService.confirmRegistration(id, key);
     } catch (e) {
-        console.log('confirmRegistration', e);
+        throw new HttpServerError(e);
     }
 };

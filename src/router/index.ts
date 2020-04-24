@@ -1,14 +1,14 @@
 import * as Router from 'koa-router';
 
-// tslint:disable-next-line:no-default-import import-spacing
 import authRouter from './auth';
-// tslint:disable-next-line:no-default-import import-spacing
 import  userRouter from './users';
+import commonChatsRouter from './chats';
 
 const commonRouter = new Router();
 
 commonRouter.use('/users', userRouter);
 commonRouter.use('/auth', authRouter);
+commonRouter.use('/chats', commonChatsRouter);
 
 // tslint:disable-next-line:no-default-export
 export default commonRouter.routes();

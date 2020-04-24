@@ -6,7 +6,7 @@ export class UserService extends BaseModelService {
 
   static checkExistUser(isUser: boolean): never | void {
     if (isUser) {
-      throw new HttpError(409, 'User has already registered', 'Can\'t register');
+      throw new HttpError(409, 'User has already registered', 'CAN_NOT_REGISTER');
     }
   }
 

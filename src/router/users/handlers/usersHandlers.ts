@@ -1,4 +1,5 @@
 import { UserService } from '../../../services/user';
+import { HttpServerError } from '../../../utils/httpError';
 
 export const createUser = async (ctx: any): Promise<void> => {
   try {
@@ -6,8 +7,7 @@ export const createUser = async (ctx: any): Promise<void> => {
     const newUser = ctx.request.body;
     ctx.response.body = await userService.createUser(newUser);
   } catch (e) {
-    ctx.response.body = JSON.stringify(e);
-    ctx.response.status = 500;
+    throw new HttpServerError(e);
   }
 };
 
@@ -17,8 +17,7 @@ export const deleteUser = async (ctx: any): Promise<void> => {
      const { id } = ctx.params;
      ctx.response.body = await userService.deleteUser(+id);
    } catch (e) {
-     ctx.response.body = JSON.stringify(e);
-     ctx.response.status = 500;
+     throw new HttpServerError(e);
    }
 };
 
@@ -28,8 +27,7 @@ export const user = async (ctx: any): Promise<void> => {
     const { id } = ctx.params;
     ctx.response.body = await userService.getUser(id);
   } catch (e) {
-    ctx.response.body = JSON.stringify(e);
-    ctx.response.status = 500;
+    throw new HttpServerError(e);
   }
 };
 
@@ -38,8 +36,7 @@ export const users = async (ctx: any): Promise<void> => {
     const userService = new UserService();
     ctx.response.body = await userService.getUsers();
   } catch (e) {
-    ctx.response.body = JSON.stringify(e);
-    ctx.response.status = 500;
+    throw new HttpServerError(e);
   }
 };
 
@@ -55,8 +52,7 @@ export const updateUser = async (ctx: any): Promise<void> => {
       ctx.response.body = await userService.getUser(id);
     }
   } catch (e) {
-    ctx.response.body = JSON.stringify(e);
-    ctx.response.status = 500;
+    throw new HttpServerError(e);
   }
   // const file = await storageService.uploadFile(ctx.file, 'users-images/');
   //

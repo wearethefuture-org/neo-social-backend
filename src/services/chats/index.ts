@@ -1,5 +1,5 @@
-import { IChat } from '../interfaces';
-import { BaseModelService } from './baseModel';
+import { IChat } from '../../interfaces';
+import { BaseModelService } from '../baseModel';
 
 export class ChatsService extends BaseModelService {
   async getChats(): Promise<IChat[]> {
