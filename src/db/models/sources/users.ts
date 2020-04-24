@@ -23,6 +23,11 @@ export default (sequelize: any, DataTypes: any) => {
                 allowNull: false,
                 field: 'first_name'
             },
+            userName: {
+              type: DataTypes.STRING,
+              allowNull: true,
+              field: 'user_name'
+            },
             lastName: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -72,11 +77,6 @@ export default (sequelize: any, DataTypes: any) => {
                 type: DataTypes.DATE,
                 allowNull: true,
                 field: 'updated_at'
-            },
-            userName: {
-              type: DataTypes.STRING,
-              allowNull: true,
-              field: 'user_name'
             }
         },
         {
