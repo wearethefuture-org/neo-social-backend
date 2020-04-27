@@ -47,7 +47,7 @@ export class AuthRouter {
     @summary('User confirm')
     @tags(['Auth'])
     @body({
-        id: { type: 'string', required: true },
+        id: { type: 'number', required: true },
         key: { type: 'string', required: true }
     })
     static async confirmRegistration(ctx: any): Promise<void> {
