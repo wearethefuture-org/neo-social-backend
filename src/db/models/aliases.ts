@@ -1,27 +1,6 @@
 export const aliases = {
-  categories: {
-    subCategories: 'subCategories'
-  },
-  subCategories: {
-    categories: 'categories',
-    characteristicsSettings: 'characteristicsSettings',
-    products: 'products'
-  },
-  products: {
-    subCategories: 'subCategories',
-    characteristicsValues: 'characteristicsValues',
-    previewImage: 'previewImage',
-    images: 'images',
+  chats: {
     comments: 'comments'
-  },
-  chats: {},
-  characteristicsSettings: {
-    subCategories: 'subCategories',
-    characteristicsValues: 'characteristicsValues'
-  },
-  characteristicsValues: {
-    products: 'products',
-    characteristicsSettings: 'characteristicsSettings'
   },
   users: {
     usersKeys: 'usersKeys',
@@ -32,14 +11,11 @@ export const aliases = {
   usersKeys: {
     users: 'users'
   },
-  usersForgotPasswords: {
-    users: 'users'
-  },
   files: {
     products: 'products'
   },
   comments: {
     user: 'user',
-    product: 'product'
+    chat: 'chat'
   }
 };

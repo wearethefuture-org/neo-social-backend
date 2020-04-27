@@ -6,12 +6,13 @@ export class ChatsService extends BaseModelService {
     return this.model.chats.findAll({});
   }
 
-  async getChat(name: string): Promise<IChat> {
+  async getChat(id: number): Promise<IChat> {
     return this.model.chats.findOne(
       {
         where: {
-          name
-        }
+          id
+        },
+
       }
     );
   }

@@ -1,4 +1,11 @@
 export const relations = (db: any): void => {
+  db.chats.hasMany(db.comments, {
+    as: db.aliases.chats.comments,
+    field: 'chat_id',
+    targetKey: 'id',
+    foreignKey: 'chatId'
+  })
+
   // db.categories.hasMany(db.subCategories, {
   //   as: db.aliases.categories.subCategories,
   //   field: 'category_id',

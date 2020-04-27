@@ -14,8 +14,8 @@ export const getChats = async (ctx: any): Promise<void> => {
 export const getChat = async (ctx: any): Promise<void> => {
   try {
     const chatsService = new ChatsService();
-    const { name } = ctx.params;
-    ctx.response.body = await chatsService.getChat(name);
+    const { id } = ctx.params;
+    ctx.response.body = await chatsService.getChat(id);
   } catch (error) {
     throw new HttpServerError(error);
   }
