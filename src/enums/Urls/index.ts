@@ -1,7 +1,7 @@
-import {  unauthorizedUrls } from './unauthorizedUrls';
 import { passportUrls } from './passport';
+import {  unauthorizedUrls } from './unauthorizedUrls';
 
 export {
-    passportUrls,
-    unauthorizedUrls
+   passportUrls,
+   unauthorizedUrls
 };
