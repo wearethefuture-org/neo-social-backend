@@ -6,22 +6,32 @@ envIndex(`${__dirname}/../`);
 
 import * as Koa from 'koa';
 import * as koaBody from 'koa-body';
-import * as Router from 'koa-router';
+
 const cors = require('@koa/cors');
+const swagger = require('koa-swagger-decorator');
+
 import { authMiddleware } from './middleware/authMiddleware';
-// tslint:disable-next-line:no-default-import
-import router from './router';
+import { errorMiddleware } from './middleware/errorMiddleware';
+
+import { apiRouterV1 } from './router';
 
 const app = new Koa();
 app.use(cors());
 
-const apiRouter = new Router({ prefix: '/api/v1'});
-apiRouter.use(router);
+const router = new swagger.SwaggerRouter();
+router.use('/api/v1', apiRouterV1.routes());
 
+router.swagger({
+    title: 'API',
+    description: 'API DOC',
+    version: '1.0.0'
+});
+
+app.use(errorMiddleware);
 app.use(authMiddleware);
 app.use(koaBody());
-app.use(apiRouter.routes());
-app.use(apiRouter.allowedMethods());
+app.use(router.routes());
+app.use(router.allowedMethods());
 
 const PORT = process.env.PORT;
 
