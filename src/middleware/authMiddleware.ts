@@ -5,39 +5,38 @@ import { HttpError } from '../utils/httpError';
 
 import { match } from 'path-to-regexp';
 
-
 export const authMiddleware = async (ctx: any, next: any) => {
-       await passport.authenticate('jwt', { session: false }, async (err: Error, user: any) => {
-              if (err) {
-                     throw err;
-              }
+    await passport.authenticate('jwt', {session: false}, async (err: Error, user: any) => {
+        if (err) {
+            throw err;
+        }
 
-              const { url, method } = ctx.request;
-              let routeGuared = true;
+        const {url, method} = ctx.request;
+        let routeGuared = true;
 
-              for (let i = 0; i < unauthorizedUrls.length; i++) {
-                     const regexp = match(unauthorizedUrls[i].url, {decode: decodeURIComponent});
-                     if (method === unauthorizedUrls[i].method && regexp(url)) {
-                            routeGuared = false;
-                            break;
-                     }
-              }
+        for (const unauthorizedUrl of unauthorizedUrls) {
+            const regexp = match(unauthorizedUrl.url, {decode: decodeURIComponent});
+            if (method === unauthorizedUrl.method && regexp(url)) {
+                routeGuared = false;
+                break;
+            }
+        }
 
-              if (!routeGuared) {
-                     await next();
+        if (!routeGuared) {
+            await next();
 
-                     return;
-              }
+            return;
+        }
 
-              if (!user) {
-                     throw new HttpError(401, 'Unauthorized!' , 'Access denied');
-              }
+        if (!user) {
+            throw new HttpError(401, 'Unauthorized!', 'Access denied');
+        }
 
-              if (user.status !== USER_STATUS.confirmed) {
-                     throw new HttpError(401, 'Unconfirmed email!' , 'Access denied');
-              }
+        if (user.status !== USER_STATUS.confirmed) {
+            throw new HttpError(401, 'Unconfirmed email!', 'Access denied');
+        }
 
-              ctx.user = user;
-              await next();
-       })(ctx, next);
+        ctx.user = user;
+        await next();
+    })(ctx, next);
 };

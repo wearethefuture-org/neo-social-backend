@@ -1,11 +1,63 @@
-import * as Router from 'koa-router';
-import { confirmRegistration, login, register } from './handlers/authHandlers';
+import { body, request, summary, tags } from 'koa-swagger-decorator';
+import { AuthService } from '../../services/auth';
+import { HttpServerError } from '../../utils/httpError';
 
-const authRouter = new Router();
+export class AuthRouter {
+    @request('post', '/auth/login')
+    @summary('User login')
+    @tags(['Auth'])
+    @body({
+        email: { type: 'string', required: true },
+        password: { type: 'string', required: true }
+    })
+    static async login(ctx: any): Promise<void> {
+        try {
+            const {email, password} = ctx.validatedBody;
 
-authRouter.post('/login', login);
-authRouter.post('/register', register);
-authRouter.post('/confirm', confirmRegistration);
+            ctx.response.body = await new AuthService()
+                .login({email, password});
+        } catch (e) {
+            throw new HttpServerError(e);
+        }
+    }
 
-// tslint:disable-next-line:no-default-export
-export default  authRouter.routes();
+    @request('post', '/auth/register')
+    @summary('User registration')
+    @tags(['Auth'])
+    @body({
+        firstName: { type: 'string', required: true },
+        lastName: { type: 'string', required: true },
+        email: { type: 'string', required: true },
+        password: { type: 'string', required: true },
+        birthdayDate: { type: 'string', required: true }
+    })
+    static async register(ctx: any): Promise<void> {
+        try {
+            const user = ctx.validatedBody;
+
+            ctx.response.status = await new AuthService()
+                .register(user)
+                .then(response => response.status);
+        } catch (e) {
+            throw new HttpServerError(e);
+        }
+    }
+
+    @request('post', '/auth/confirm')
+    @summary('User confirm')
+    @tags(['Auth'])
+    @body({
+        id: { type: 'string', required: true },
+        key: { type: 'string', required: true }
+    })
+    static async confirmRegistration(ctx: any): Promise<void> {
+        try {
+            const { id, key } = ctx.validatedBody;
+
+            ctx.response.body = await new AuthService()
+                .confirmRegistration(id, key);
+        } catch (e) {
+            throw new HttpServerError(e);
+        }
+    }
+}
