@@ -75,7 +75,7 @@ export class AuthService extends BaseModelService {
 
             return false;
         } catch (e) {
-            console.log('confirmRegistration', e);
+            throw new HttpError(500, e, 'Confirm error');
         }
     }
 
