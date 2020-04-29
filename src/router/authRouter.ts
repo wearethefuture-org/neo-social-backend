@@ -1,6 +1,6 @@
 import { body, request, summary, tags } from 'koa-swagger-decorator';
-import { AuthService } from '../../services/auth';
-import { HttpServerError } from '../../utils/httpError';
+import { AuthService } from '../services/auth';
+import { HttpServerError } from '../utils/httpError';
 
 export class AuthRouter {
     @request('post', '/auth/login')
