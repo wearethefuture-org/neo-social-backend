@@ -6,8 +6,4 @@ module.exports = {
       unique: true
     });
   },
-
-  down: (queryInterface, Sequelize) => {
-
-  }
 };
