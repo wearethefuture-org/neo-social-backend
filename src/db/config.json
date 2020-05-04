@@ -1,8 +1,8 @@
 {
   "local": {
     "username": "postgres",
-    "password": "Test1234",
-    "database": "social",
+    "password": "ыекщлук95",
+    "database": "Swag",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "migrationStorageTableName": "sequelize_meta",
@@ -31,8 +31,8 @@
   },
   "development": {
     "username": "postgres",
-    "password": "Test1234",
-    "database": "social",
+    "password": "ыекщлук95",
+    "database": "Swag",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "migrationStorageTableName": "sequelize_meta",
