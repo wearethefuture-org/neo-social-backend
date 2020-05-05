@@ -1,11 +1,5 @@
-
 // tslint:disable-next-line:no-require-imports
 const swagger = require('koa-swagger-decorator');
-
-
-// tslint:disable-next-line:no-default-import
-// import commonChatsRouter from './chats';
-// tslint:disable-next-line:no-default-import
 import { AuthRouter } from './auth';
 import { ChatRouter } from './chats';
 import { UserRouter } from './users';
@@ -15,9 +9,6 @@ export const apiRouterV1 = new swagger.SwaggerRouter();
 apiRouterV1.map(AuthRouter, {});
 apiRouterV1.map(ChatRouter, {});
 apiRouterV1.map(UserRouter, {});
-
-// apiRouterV1.use('/users', userRouter);
-// apiRouterV1.use('/chats', commonChatsRouter);
 
 apiRouterV1.swagger({
     title: 'API V1',
