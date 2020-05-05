@@ -12,3 +12,20 @@ export class HttpError extends Error {
         this.status = status;
     }
 }
+
+export class HttpServerError extends Error {
+    statusCode: any;
+    expose: any;
+    body: any;
+    status: 500;
+    constructor(error: any) {
+        super(error);
+        console.log(error);
+        console.log('error');
+        this.expose = true;
+
+        this.statusCode = 500;
+        this.body = {error};
+        // this.status = status;
+    }
+}

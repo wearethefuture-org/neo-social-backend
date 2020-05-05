@@ -40,7 +40,7 @@ const users = [
 module.exports = {
   up: async (queryInterface) => {
     await Promise.each(users, async user => {
-      user.password = await bcrypt.hash(user.password, +process.env.saltRounds);
+      user.password = await bcrypt.hash(user.password, +process.env.SALT_ROUNDS);
 
       await queryInterface.bulkInsert('users', [user]);
       // try {

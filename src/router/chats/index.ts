@@ -4,7 +4,7 @@ import { createChat, getChat, getChats } from './handlers/chatsHandlers';
 const commonChatsRouter = new Router();
 
 commonChatsRouter.get('/', getChats);
-commonChatsRouter.get('/:name', getChat);
+commonChatsRouter.get('/:id', getChat);
 commonChatsRouter.post('/', createChat);
 
 export default commonChatsRouter.routes();

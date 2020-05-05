@@ -6,7 +6,7 @@ export class UserService extends BaseModelService {
 
   static checkExistUser(isUser: boolean): never | void {
     if (isUser) {
-      throw new HttpError(409, 'User has already registered', 'Can\'t register');
+      throw new HttpError(409, 'User has already registered', 'CAN_NOT_REGISTER');
     }
   }
 
@@ -14,26 +14,19 @@ export class UserService extends BaseModelService {
     return this.model.users.findAll({});
   }
 
-  async getUser(id: string): Promise<void> {
+  async getUser(id: number): Promise<any> {
     return this.model.users.findOne({
       where: {
         id
-      },
-      include: [
-        {
-          model: this.model.files,
-          as: this.aliases.users.files
-        }
-      ]
+      }
     });
   }
 
   async getUserByEmail(email: string): Promise<IUser> {
-    return  this.model.users.findOne({
+    return this.model.users.findOne({
       where: {
         email
       }
-      // raw: true
     });
   }
 

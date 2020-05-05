@@ -19,13 +19,13 @@ export class AuthService extends BaseModelService {
             throw new HttpError(401, 'User is unregistered', 'Access denied');
         }
 
-        if (dbUser.user.status !== USER_STATUS.confirmed) {
-            throw new HttpError(401, 'User status is not confirmed', 'Access denied');
-        }
-
         const compared = await bcrypt.compare(user.password, dbUser.password);
 
         if (compared) {
+            if (dbUser.status !== USER_STATUS.confirmed) {
+                throw new HttpError(401, 'User status is not confirmed', 'Access denied');
+            }
+
             delete dbUser.dataValues.password;
             const token = await tokenService.generateToken({user: dbUser.dataValues}, +process.env.TOKEN_TIME);
 
@@ -46,9 +46,9 @@ export class AuthService extends BaseModelService {
 
             UserService.checkExistUser(!!dbUser);
 
-            user.password = await bcrypt.hash(user.password, +process.env.saltRounds);
+            user.password = await bcrypt.hash(user.password, +process.env.SALT_ROUNDS);
             const createdUser: IUser = (await userService.createUser(user)).dataValues;
-            const dataSendMail = await mailService.generateDataMail(createdUser.id, createdUser.firstName, createdUser.email);
+            const dataSendMail = await mailService.generateDataRegMail(createdUser.id, createdUser.firstName, createdUser.email);
 
             mailService.sendMail(dataSendMail);
 
@@ -56,24 +56,27 @@ export class AuthService extends BaseModelService {
                 status: 200
             };
         } catch (e) {
-            throw new HttpError(500, 'Backend error', 'Access denied');
+            throw new HttpError(500, e, 'Access denied');
         }
     }
 
-    async confirmRegistration(key: string): Promise<boolean> {
-        const userKeysService = new UsersKeysService();
-        const userService = new UserService();
+    async confirmRegistration(id: number, key: string): Promise<boolean> {
+        try {
+            const userKeysService = new UsersKeysService();
+            const userService = new UserService();
+            const userKey = await userKeysService.getUserKey(key, id);
 
-        const userKey = await userKeysService.getUserKey(key);
+            if (userKey) {
+                await userService.updateUser(id, {status: USER_STATUS.confirmed});
+                await userKeysService.deleteUserKey(userKey.id);
 
-        if (userKey) {
-            await userService.updateUser(userKey.userId, {status: USER_STATUS.confirmed});
-            await userKeysService.deleteUserKey(userKey.id);
+                return true;
+            }
 
-            return true;
+            return false;
+        } catch (e) {
+            throw new HttpError(500, e, 'Confirm error');
         }
-
-        return false;
     }
 
 }
