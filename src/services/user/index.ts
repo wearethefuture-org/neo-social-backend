@@ -17,7 +17,13 @@ export class UserService extends BaseModelService {
         return this.model.users.findOne({
             where: {
                 id
-            }
+            },
+            include: [
+                {
+                    model: this.model.files,
+                    as: this.aliases.users.files
+                }
+            ]
         });
     }
 

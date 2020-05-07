@@ -4,7 +4,7 @@ export const relations = (db: any): void => {
     field: 'chat_id',
     targetKey: 'id',
     foreignKey: 'chatId'
-  })
+  });
 
   // db.categories.hasMany(db.subCategories, {
   //   as: db.aliases.categories.subCategories,
@@ -120,10 +120,11 @@ export const relations = (db: any): void => {
   //   onDelete: 'CASCADE'
   // });
 
-  // db.users.belongsTo(db.files, {
-  //   as: db.aliases.users.files,
-  //   foreignKey: 'avatarId'
-  // });
+  db.users.belongsTo(db.files, {
+    as: db.aliases.users.files,
+    foreignKey: 'avatarId'
+  });
+
   // db.users.hasMany(db.comments, {
   //   as: db.aliases.users.comments,
   //   field: 'user_id',

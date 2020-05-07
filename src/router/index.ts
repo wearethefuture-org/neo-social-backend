@@ -7,12 +7,10 @@ import commonChatsRouter from './chats';
 import userRouter from './users';
 
 import { AuthRouter } from './authRouter';
-import { ProfileRouter } from './profileRouter';
 
 export const apiRouterV1 = new swagger.SwaggerRouter();
 
 apiRouterV1.map(AuthRouter, {});
-apiRouterV1.map(ProfileRouter, {});
 
 apiRouterV1.use('/users', userRouter);
 apiRouterV1.use('/chats', commonChatsRouter);
