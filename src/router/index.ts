@@ -1,6 +1,9 @@
+// tslint:disable-next-line:no-require-imports
 const swagger = require('koa-swagger-decorator');
 
+// tslint:disable-next-line:no-default-import
 import commonChatsRouter from './chats';
+// tslint:disable-next-line:no-default-import
 import userRouter from './users';
 
 import { AuthRouter } from './authRouter';

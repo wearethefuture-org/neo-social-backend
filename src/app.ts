@@ -7,7 +7,9 @@ envIndex(`${__dirname}/../`);
 import * as Koa from 'koa';
 import * as koaBody from 'koa-body';
 
+// tslint:disable-next-line:no-require-imports
 const cors = require('@koa/cors');
+// tslint:disable-next-line:no-require-imports
 const swagger = require('koa-swagger-decorator');
 
 import { authMiddleware } from './middleware/authMiddleware';

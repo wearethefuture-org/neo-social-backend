@@ -7,8 +7,8 @@ export class AuthRouter {
     @summary('User login')
     @tags(['Auth'])
     @body({
-        email: { type: 'string', required: true },
-        password: { type: 'string', required: true }
+        email: { type: 'string', required: true, example: 'admin@gmail.com' },
+        password: { type: 'string', required: true, example: 'test' }
     })
     static async login(ctx: any): Promise<void> {
         try {
@@ -27,6 +27,7 @@ export class AuthRouter {
     @body({
         firstName: { type: 'string', required: true },
         lastName: { type: 'string', required: true },
+        userName: { type: 'string', required: true },
         email: { type: 'string', required: true },
         password: { type: 'string', required: true },
         birthdayDate: { type: 'string', required: true }
