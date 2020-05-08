@@ -4,8 +4,8 @@
 /.env
 
 # Mac files
-.DS_store
-*.DS_store
+.DS_Store
+*.DS_Store
 
 # Logs
 logs
