@@ -32,7 +32,7 @@
   "development": {
     "username": "postgres",
     "password": 12321,
-    "database": "test",
+    "database": "social",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "migrationStorageTableName": "sequelize_meta",

@@ -5,6 +5,7 @@
 
 # Mac files
 .DS_store
+*.DS_store
 
 # Logs
 logs
