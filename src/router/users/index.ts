@@ -40,11 +40,10 @@ export class UserRouter {
         userName: { type: 'string', required: true, example: 'Swagger' },
         firstName: { type: 'string', required: true, example: 'John' },
         lastName: { type: 'string', required: true, example: 'Smith' },
-        birthdayDate: { type: 'date', required: true,  example: 1983 - 11 - 22 },
+        birthdayDate: { type: 'string', required: true,  example: '1983 - 11 - 22' },
         email: { type: 'string', required: true, example: 'Smith@google.com' },
         password: { type: 'string', required: true, example: 'Smith33255' },
         disabled: { type: 'boolean', required: false,  example: 'true' },
-        id: { type: 'number', required: false, example: 545 },
         avatar_id: { type: 'number', required: false,  example: 545 },
         status: { type: 'string', required: false,  example: 'invited pending confirmed' },
         role: { type: 'string', required: false,  example: 'user admin superadmin' }
@@ -67,14 +66,13 @@ export class UserRouter {
         id: { type: 'number', required: true }
     })
     @body({
-        id: { type: 'number', required: false, example: 545 },
         avatar_id: { type: 'number', required: false,  example: 545 },
         userName: { type: 'string', required: false,  example: 'Swagger' },
         firstName: { type: 'string', required: false,  example: 'John' },
         lastName: { type: 'string', required: false,  example: 'Smith' },
         email: { type: 'string', required: false,  example: 'Smith@google.com' },
         password: { type: 'string', required: false,  example: 'Smith33255' },
-        birthdayDate: { type: 'date', required: false,  example: 1983 - 11 - 22 },
+        birthdayDate: { type: 'string', required: false,  example: '1983 - 11 - 22' },
         status: { type: 'string', required: false,  example: 'invited pending confirmed' },
         role: { type: 'string', required: false,  example: 'user admin superadmin' },
         disabled: { type: 'boolean', required: false,  example: 'true' }
