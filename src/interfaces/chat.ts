@@ -4,6 +4,7 @@ export interface IChat {
   description: string;
   logo_id: number;
   available: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  owner_id: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

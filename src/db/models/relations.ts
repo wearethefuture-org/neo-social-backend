@@ -1,10 +1,22 @@
 export const relations = (db: any): void => {
   db.chats.hasMany(db.comments, {
-    as: db.aliases.chats.comments,
+    onDelete: 'cascade',
     field: 'chat_id',
     targetKey: 'id',
     foreignKey: 'chatId'
-  })
+  });
+  db.users.hasMany(db.chats, {
+    onDelete: 'cascade',
+    field: 'owner_id',
+    targetKey: 'id',
+    foreignKey: 'ownerId'
+  });
+  db.chats.belongsTo(db.users, {
+    targetKey: 'id',
+    onDelete: 'cascade',
+    field: 'owner_id',
+    foreignKey: 'ownerId'
+  });
 
   // db.categories.hasMany(db.subCategories, {
   //   as: db.aliases.categories.subCategories,

@@ -18,7 +18,10 @@ export class UserService extends BaseModelService {
     return this.model.users.findOne({
       where: {
         id
-      }
+      },
+      include: [{
+        model: this.model.chats
+      }]
     });
   }
 
