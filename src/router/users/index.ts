@@ -73,8 +73,8 @@ export class UserRouter {
         email: { type: 'string', required: false,  example: 'Smith@google.com' },
         password: { type: 'string', required: false,  example: 'Smith33255' },
         birthdayDate: { type: 'string', required: false,  example: '1983 - 11 - 22' },
-        status: { type: 'string', required: false,  example: 'invited pending confirmed' },
-        role: { type: 'string', required: false,  example: 'user admin superadmin' },
+        status: { type: 'string', required: false,  example: 'invited | pending | confirmed' },
+        role: { type: 'string', required: false,  example: 'user | admin | superadmin' },
         disabled: { type: 'boolean', required: false,  example: 'true' }
     })
     static async updateUser(ctx: any): Promise<void> {
