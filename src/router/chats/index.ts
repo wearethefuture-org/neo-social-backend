@@ -39,10 +39,10 @@ export class ChatRouter {
     @tags([ 'Chat' ])
     @body({
         name: { type: 'string', required: true, example: 'John' },
-        id: { type: 'number', required: false, example: 545 },
         description: { type: 'string', required: false, example: 'Work chat' },
         logoId: { type: 'number', required: false, example: 545 },
-        available: { type: 'boolean', required: false, example: true }
+        available: { type: 'boolean', required: false, example: true },
+        ownerId: { type: 'number', required: false, example: 1 }
     })
     static async createChat(ctx: any): Promise<void> {
         try {
