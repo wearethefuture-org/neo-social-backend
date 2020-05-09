@@ -10,14 +10,21 @@ export class UserService extends BaseModelService {
     }
   }
 
-  async getUsers(): Promise<void> {
-    return this.model.users.findAll({});
+  async getUsers(): Promise<IUser> {
+    return this.model.users.findAll({
+      attributes: {
+        exclude: ['password']
+      }
+    });
   }
 
-  async getUser(id: number): Promise<any> {
+  async getUser(id: number): Promise<IUser> {
     return this.model.users.findOne({
       where: {
         id
+      },
+      attributes: {
+        exclude: ['password']
       },
       include: [{
         model: this.model.chats
@@ -29,6 +36,9 @@ export class UserService extends BaseModelService {
     return this.model.users.findOne({
       where: {
         email
+      },
+      attributes: {
+        exclude: ['password']
       }
     });
   }
@@ -37,7 +47,7 @@ export class UserService extends BaseModelService {
     return this.model.users.create(user);
   }
 
-  async updateUser(id: number, newData: any): Promise<void> {
+  async updateUser(id: number, newData: any): Promise<any> {
     return this.model.users.update(newData, {
       where: {
         id
@@ -45,7 +55,7 @@ export class UserService extends BaseModelService {
     });
   }
 
-  async deleteUser(id: number): Promise<void> {
+  async deleteUser(id: number): Promise<any> {
     return this.model.users.destroy({
       where: {
         id
