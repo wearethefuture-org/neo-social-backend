@@ -1,5 +1,5 @@
 import * as nodemailer from 'nodemailer';
-import * as smtpTransport from 'nodemailer-smtp-transport';
+import smtpTransport from 'nodemailer-smtp-transport';
 import * as Mail from 'nodemailer/lib/mailer';
 import { IDataMail } from '../../interfaces';
 import { RenderHTMLService } from '../renderHTML';

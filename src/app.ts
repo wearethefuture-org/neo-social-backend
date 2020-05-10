@@ -10,14 +10,14 @@ envIndex(`${__dirname}/../`);
 import { Platform } from './platform';
 Platform.init();
 
-import * as Koa from 'koa';
-import * as koaBody from 'koa-body';
-import * as serve from 'koa-static';
+import Koa from 'koa';
+import koaBody from 'koa-body';
+import serve from 'koa-static';
 
 // tslint:disable-next-line:no-require-imports
 const cors = require('@koa/cors');
-// tslint:disable-next-line:no-require-imports
-const swagger = require('koa-swagger-decorator');
+
+import { SwaggerRouter } from 'koa-swagger-decorator';
 
 import { authMiddleware } from './middleware/authMiddleware';
 import { errorMiddleware } from './middleware/errorMiddleware';
@@ -26,7 +26,7 @@ import { fileMiddleware } from './middleware/fileMiddleware';
 import { apiRouterV1 } from './router';
 
 const app = new Koa();
-const router = new swagger.SwaggerRouter();
+const router = new SwaggerRouter();
 
 router.swagger({
     title: 'API',
