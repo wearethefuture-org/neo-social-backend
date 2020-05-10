@@ -20,8 +20,8 @@ export class HttpServerError extends Error {
     status: 500;
     constructor(error: any) {
         super(error);
-        console.log(error);
-        console.log('error');
+        console.info(error);
+        console.info('error');
         this.expose = true;
 
         this.statusCode = 500;

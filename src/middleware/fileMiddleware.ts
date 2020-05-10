@@ -1,18 +1,19 @@
-import * as path from 'path';
-
 // tslint:disable-next-line:no-require-imports
 const multer = require('@koa/multer');
 
+import * as path from 'path';
 import { match } from 'path-to-regexp';
-import { singleFilesUrls } from '../enums/Urls/index';
+
+import { singleFilesUrls } from '../enums/Urls';
+import { Platform } from '../platform';
 
 const storage = multer.diskStorage({
     destination: (req: any , file: any, cb: any) => {
-        cb(undefined, path.join(__dirname, '../public'));
+        cb(undefined, Platform.publicDIR);
     },
     filename: (req: any , file: any, cb: any) => {
-        const type = file.originalname.split('.')[1];
-        cb(undefined, `${Date.now()}.${type}`);
+        const ext = path.extname(file.originalname);
+        cb(undefined, `${Date.now()}${ext}`);
     }
 });
 

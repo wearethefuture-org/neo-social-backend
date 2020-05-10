@@ -17,12 +17,11 @@ const nodemailerClient = nodemailer.createTransport(smtpTransport({
 }));
 
 export class MailService {
-    private client = nodemailerClient;
+    private readonly client = nodemailerClient;
 
     public sendMail(mail: Mail.Options): void {
         this.client.sendMail(mail, (err: Error | null) => {
             return !err;
-
         });
     }
 

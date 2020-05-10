@@ -12,7 +12,8 @@
     "db:migrateWin": "SET NODE_ENV=local sequelize db:migrate",
     "db:migrateWindows": "npx sequelize-cli db:migrate",
     "build:watch": "tsc -w",
-    "start:seed": "DEBUG=‘app*,critical*,info*,warning*,security*’ NODE_ENV=local sequelize db:seed --seed NAME_OF_SEED"
+    "start:seed": "DEBUG=‘app*,critical*,info*,warning*,security*’ NODE_ENV=local sequelize db:seed --seed NAME_OF_SEED",
+    "lint": "tslint -c tslint.json -p tsconfig.json "
   },
   "keywords": [],
   "author": "",
