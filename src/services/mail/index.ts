@@ -1,5 +1,5 @@
 import * as nodemailer from 'nodemailer';
-import * as smtpTransport from 'nodemailer-smtp-transport';
+import smtpTransport from 'nodemailer-smtp-transport';
 import * as Mail from 'nodemailer/lib/mailer';
 import { IDataMail } from '../../interfaces';
 import { RenderHTMLService } from '../renderHTML';
@@ -17,12 +17,11 @@ const nodemailerClient = nodemailer.createTransport(smtpTransport({
 }));
 
 export class MailService {
-    private client = nodemailerClient;
+    private readonly client = nodemailerClient;
 
     public sendMail(mail: Mail.Options): void {
         this.client.sendMail(mail, (err: Error | null) => {
             return !err;
-
         });
     }
 

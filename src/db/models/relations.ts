@@ -5,17 +5,24 @@ export const relations = (db: any): void => {
     targetKey: 'id',
     foreignKey: 'chatId'
   });
+
   db.users.hasMany(db.chats, {
     onDelete: 'cascade',
     field: 'owner_id',
     targetKey: 'id',
     foreignKey: 'ownerId'
   });
+
   db.chats.belongsTo(db.users, {
     targetKey: 'id',
     onDelete: 'cascade',
     field: 'owner_id',
     foreignKey: 'ownerId'
+  });
+
+  db.users.belongsTo(db.files, {
+    as: db.aliases.users.files,
+    foreignKey: 'avatarId'
   });
 
   // db.categories.hasMany(db.subCategories, {
@@ -130,11 +137,6 @@ export const relations = (db: any): void => {
   //   targetKey: 'id',
   //   foreignKey: 'userId',
   //   onDelete: 'CASCADE'
-  // });
-
-  // db.users.belongsTo(db.files, {
-  //   as: db.aliases.users.files,
-  //   foreignKey: 'avatarId'
   // });
   // db.users.hasMany(db.comments, {
   //   as: db.aliases.users.comments,
