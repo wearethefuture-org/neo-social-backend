@@ -30,7 +30,7 @@ export class MailService {
         const renderHTMLService = new RenderHTMLService();
         const userByKey = await userKeysService.createUserKey(id);
         const html = await renderHTMLService.render('confirmEmail', {
-            url: `${process.env.FRONT_URL}:${process.env.FRONT_PORT}/auth/confirm/?key=${userByKey.key}&id=${id}`,
+            url: `${process.env.FRONT_URL}:${process.env.FRONT_PORT}/auth/confirm?key=${userByKey.key}&id=${id}`,
             name
         });
 

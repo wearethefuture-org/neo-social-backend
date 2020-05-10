@@ -11,7 +11,15 @@ export class ChatsService extends BaseModelService {
             {
                 where: {
                     id
-                }
+                },
+                include: [
+                    {
+                        model: this.model.users,
+                        attributes: {
+                            exclude: ['password']
+                        }
+                    }
+                ]
             }
         );
     }
