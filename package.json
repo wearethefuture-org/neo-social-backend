@@ -5,12 +5,12 @@
   "main": "dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon dist/app.js",
+    "start": "node -r ts-node/register -r ./tsconfig.json ./src/app.ts",
     "start:dev": "nodemon --inspect src/app.ts",
     "db:migrate": "sequelize db:migrate",
     "start:seed": "sequelize db:seed --seed NAME_OF_SEED",
     "build:watch": "tsc -w",
-    "lint": "tslint -c tslint.json -p tsconfig.json "
+    "lint": "tslint -c tslint.json -p tsconfig.json"
   },
   "keywords": [],
   "author": "",
