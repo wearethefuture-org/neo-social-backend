@@ -1,4 +1,4 @@
-import { passportUrls } from '../enums/Urls';
+import { unauthorizedUrls } from '../enums/Urls';
 import { USER_STATUS } from '../enums/users/constants';
 import { passport } from '../services/passport';
 import { HttpError } from '../utils/httpError';
@@ -6,42 +6,37 @@ import { HttpError } from '../utils/httpError';
 import { match } from 'path-to-regexp';
 
 export const authMiddleware = async (ctx: any, next: any) => {
-       await passport.authenticate('jwt', { session: false }, async (err: Error, user: any) => {
-              if (err) {
-                     throw err;
-              }
+    await passport.authenticate('jwt', {session: false}, async (err: Error, user: any) => {
+        if (err) {
+            throw err;
+        }
 
-              const { url, method } = ctx.request;
-              let routeGuared = false;
+        const {url, method} = ctx.request;
+        let routeGuarded = true;
 
-              passportUrls.forEach(route => {
-                     if (method !== route.method) {
-                            return;
-                     }
+        for (const unauthorizedUrl of unauthorizedUrls) {
+            const regexp = match(unauthorizedUrl.url, {decode: decodeURIComponent});
+            if (method === unauthorizedUrl.method && regexp(url)) {
+                routeGuarded = false;
+                break;
+            }
+        }
 
-                     const regexp = match(route.url, {decode: decodeURIComponent});
+        if (!routeGuarded) {
+            await next();
 
-                     if (!regexp(url)) {
-                            return;
-                     }
+            return;
+        }
 
-                     routeGuared = true;
-              });
+        if (!user) {
+            throw new HttpError(401, 'Unauthorized!', 'Access denied');
+        }
 
-              if (!routeGuared) {
-                     await next();
+        if (user.status !== USER_STATUS.confirmed) {
+            throw new HttpError(401, 'Unconfirmed email!', 'Access denied');
+        }
 
-                     return;
-              }
-
-              if (!user) {
-                     throw new HttpError(401, 'Unauthorized!' , 'Access denied');
-              }
-              if (user.status !== USER_STATUS.confirmed) {
-                     throw new HttpError(401, 'Unconfirmed email!' , 'Access denied');
-              }
-
-              ctx.user = user;
-              await next();
-       })(ctx, next);
+        ctx.user = user;
+        await next();
+    })(ctx, next);
 };

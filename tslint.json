@@ -1,7 +1,13 @@
 {
-  "extends": ["backend-tslint-rules"],
+  "extends": [
+    "backend-tslint-rules"
+  ],
   "rules": {
-    "file-name-casing": [true, "camel-case"],
+    "no-default-export": false,
+    "file-name-casing": [
+      true,
+      "camel-case"
+    ],
     "arrow-return-shorthand": true,
     "callable-types": true,
     "class-name": true,
@@ -15,10 +21,7 @@
     },
     "eofline": true,
     "import-spacing": true,
-    "indent": [
-      true,
-      "spaces"
-    ],
+    "indent": [false, "spaces", 4],
     "interface-over-type-literal": true,
     "label-position": true,
     "member-access": false,
@@ -28,7 +31,6 @@
     "no-console": [
       true,
       "debug",
-      "info",
       "log",
       "timeEnd",
       "trace"
@@ -97,8 +99,13 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "interface-name": [true],
-    "array-type": [true, "array"],
+    "interface-name": [
+      true
+    ],
+    "array-type": [
+      true,
+      "array"
+    ],
     "typedef": [
       true,
       "call-signature",

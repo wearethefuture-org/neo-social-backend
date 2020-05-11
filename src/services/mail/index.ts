@@ -1,5 +1,5 @@
 import * as nodemailer from 'nodemailer';
-import * as smtpTransport from 'nodemailer-smtp-transport';
+import smtpTransport from 'nodemailer-smtp-transport';
 import * as Mail from 'nodemailer/lib/mailer';
 import { IDataMail } from '../../interfaces';
 import { RenderHTMLService } from '../renderHTML';
@@ -17,26 +17,25 @@ const nodemailerClient = nodemailer.createTransport(smtpTransport({
 }));
 
 export class MailService {
-    private client = nodemailerClient;
+    private readonly client = nodemailerClient;
 
     public sendMail(mail: Mail.Options): void {
         this.client.sendMail(mail, (err: Error | null) => {
             return !err;
-
         });
     }
 
-    public async generateDataMail(id: number, name: string, toMail: string): Promise<IDataMail> {
+    public async generateDataRegMail(id: number, name: string, toMail: string): Promise<IDataMail> {
         const userKeysService = new UsersKeysService();
         const renderHTMLService = new RenderHTMLService();
-        const key = await userKeysService.createUserKey(id);
+        const userByKey = await userKeysService.createUserKey(id);
         const html = await renderHTMLService.render('confirmEmail', {
-            url: `${process.env.FRONT_URL}:${process.env.FRONT_PORT}/auth/confirm/${key.key}`,
+            url: `${process.env.FRONT_URL}:${process.env.FRONT_PORT}/auth/confirm?key=${userByKey.key}&id=${id}`,
             name
         });
 
         return  {
-            from: 'wearefuture2020.03@gmail.com',
+            from: `Open Social Network<noreply.${process.env.SMTP_AUTH_USER}>`,
             to: toMail,
             subject: 'Email confirmation',
             text: 'confirm your email',

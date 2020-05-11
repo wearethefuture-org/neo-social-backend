@@ -1,14 +1,37 @@
-import * as Router from 'koa-router';
+import { SwaggerRouter } from 'koa-swagger-decorator';
 
-// tslint:disable-next-line:no-default-import import-spacing
-import authRouter from './auth';
-// tslint:disable-next-line:no-default-import import-spacing
-import  userRouter from './users';
+import { AuthRouter } from './auth.router';
+import { ChatRouter } from './chat.router';
+import { UserRouter } from './user.router';
 
-const commonRouter = new Router();
+export const apiRouterV1 = new SwaggerRouter();
 
-commonRouter.use('/users', userRouter);
-commonRouter.use('/auth', authRouter);
+apiRouterV1.map(AuthRouter, {});
+apiRouterV1.map(ChatRouter, {});
+apiRouterV1.map(UserRouter, {});
 
-// tslint:disable-next-line:no-default-export
-export default commonRouter.routes();
+apiRouterV1.swagger({
+    title: 'API V1',
+    description: 'API V1 DOC',
+    version: '1.0.0',
+    prefix: '/api/v1',
+    swaggerHtmlEndpoint: '/swagger-html',
+    swaggerJsonEndpoint: '/swagger-json',
+    swaggerOptions: {
+        securityDefinitions: {
+            ApiKeyAuth: {
+                type: 'apiKey',
+                in: 'header',
+                name: 'Authorization'
+            }
+        }
+    },
+    swaggerConfiguration: {
+        display: {
+            defaultModelsExpandDepth: 4,
+            defaultModelExpandDepth: 3,
+            docExpansion: 'list',
+            defaultModelRendering: 'model'
+        }
+    }
+});

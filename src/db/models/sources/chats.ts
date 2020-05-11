@@ -1,4 +1,4 @@
-module.exports =  (sequelize: any, DataTypes: any) => {
+export default (sequelize: any, DataTypes: any) => {
     return sequelize.define(
         'chats',
         {
@@ -30,6 +30,7 @@ module.exports =  (sequelize: any, DataTypes: any) => {
             },
             available: {
                 type: DataTypes.BOOLEAN,
+                defaultValue: true,
                 allowNull: false,
                 field: 'available'
             },
@@ -38,6 +39,11 @@ module.exports =  (sequelize: any, DataTypes: any) => {
                 allowNull: false,
                 defaultValue: sequelize.fn('NOW'),
                 field: 'created_at'
+            },
+            ownerId: {
+              type: DataTypes.BIGINT,
+              allowNull: true,
+              field: 'owner_id'
             },
             updatedAt: {
                 type: DataTypes.DATE,
