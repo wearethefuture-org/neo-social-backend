@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon dist/app.js",
-    "start:dev": "DEBUG='app*,critical*,info*,warning*,security,system*' NODE_ENV=local nodemon --inspect src/app.ts",
+    "start:dev": "nodemon --inspect src/app.ts",
     "start:devWindows": "SET NODE_ENV=local nodemon --inspect src/app.ts",
     "db:migrate": "DEBUG='app*,critical*,info*,warning*,security*' NODE_ENV=local sequelize db:migrate",
     "db:migrateWin": "SET NODE_ENV=local sequelize db:migrate",
