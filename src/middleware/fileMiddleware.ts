@@ -1,13 +1,11 @@
-// tslint:disable-next-line:no-require-imports
-const multer = require('@koa/multer');
-
+import koaMulter from '@koa/multer';
 import * as path from 'path';
 import { match } from 'path-to-regexp';
 
 import { singleFilesUrls } from '../enums/Urls';
 import { Platform } from '../platform';
 
-const storage = multer.diskStorage({
+const storage = koaMulter.diskStorage({
     destination: (req: any , file: any, cb: any) => {
         cb(undefined, Platform.publicDIR);
     },
@@ -17,7 +15,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({storage});
+const upload = koaMulter({storage});
 
 export const fileMiddleware = async (ctx: any, next: any) => {
     const { url, method } = ctx.request;
