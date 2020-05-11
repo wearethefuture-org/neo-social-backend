@@ -6,13 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon dist/app.js",
-    "start:dev": "DEBUG='app*,critical*,info*,warning*,security,system*' NODE_ENV=local nodemon --inspect src/app.ts",
-    "start:devWindows": "SET NODE_ENV=local nodemon --inspect src/app.ts",
-    "db:migrate": "DEBUG='app*,critical*,info*,warning*,security*' NODE_ENV=local sequelize db:migrate",
-    "db:migrateWin": "SET NODE_ENV=local sequelize db:migrate",
-    "db:migrateWindows": "npx sequelize-cli db:migrate",
+    "start:dev": "nodemon --inspect src/app.ts",
+    "db:migrate": "sequelize db:migrate",
+    "start:seed": "sequelize db:seed --seed NAME_OF_SEED",
     "build:watch": "tsc -w",
-    "start:seed": "DEBUG=‘app*,critical*,info*,warning*,security*’ NODE_ENV=local sequelize db:seed --seed NAME_OF_SEED",
     "lint": "tslint -c tslint.json -p tsconfig.json "
   },
   "keywords": [],
