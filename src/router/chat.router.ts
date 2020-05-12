@@ -1,4 +1,4 @@
-import { body, path, request, summary, tags } from 'koa-swagger-decorator';
+import { body, path, query, request, summary, tags } from 'koa-swagger-decorator';
 
 import { IChat } from '../interfaces';
 import { ChatsService } from '../services/chats';
@@ -8,12 +8,20 @@ export class ChatRouter {
     @request('get', '/chats')
     @summary('Chat list')
     @tags(['Chat'])
+    @query({
+        limit: { type: 'number', required: false, example: 10 },
+        offset: { type: 'number', required: false, example: 10 },
+        isGlobal: { type: 'boolean', required: false, example: true }
+    })
     static async getChats(ctx: any): Promise<void> {
         try {
             const chatsService = new ChatsService();
+            const params = ctx.validatedQuery;
+            // console.log(params);
 
-            ctx.response.body = await chatsService.getChats();
+            ctx.response.body = await chatsService.getChats(params);
         } catch (e) {
+            // console.log(e);
             throw new HttpServerError(e);
         }
     }

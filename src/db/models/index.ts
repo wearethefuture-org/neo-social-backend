@@ -31,6 +31,7 @@ const sequelize: any = new Sequelize(process.env.DATABASE_NAME, process.env.POST
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+db.Op = sequelize.Op;
 
 relations(db);
 
