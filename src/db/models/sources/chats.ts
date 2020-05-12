@@ -40,6 +40,11 @@ export default (sequelize: any, DataTypes: any) => {
                 defaultValue: sequelize.fn('NOW'),
                 field: 'created_at'
             },
+            ownerId: {
+              type: DataTypes.BIGINT,
+              allowNull: true,
+              field: 'owner_id'
+            },
             updatedAt: {
                 type: DataTypes.DATE,
                 allowNull: true,

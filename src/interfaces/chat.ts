@@ -1,9 +1,13 @@
+import { IUser } from './';
+
 export interface IChat {
   id: number;
   name: string;
   description: string;
   logo_id: number;
   available: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  owner_id: string;
+  user: IUser;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

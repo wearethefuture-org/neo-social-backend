@@ -1,14 +1,15 @@
 import { body, request, summary, tags } from 'koa-swagger-decorator';
-import { AuthService } from '../../services/auth';
-import { HttpServerError } from '../../utils/httpError';
+
+import { AuthService } from '../services/auth';
+import { HttpServerError } from '../utils/httpError';
 
 export class AuthRouter {
     @request('post', '/auth/login')
     @summary('User login')
     @tags(['Auth'])
     @body({
-        email: { type: 'string', required: true, example: 'admin@gmail.com' },
-        password: { type: 'string', required: true, example: 'test' }
+        email: {type: 'string', required: true, example: 'admin@gmail.com'},
+        password: {type: 'string', required: true, example: 'test'}
     })
     static async login(ctx: any): Promise<void> {
         try {
@@ -25,12 +26,12 @@ export class AuthRouter {
     @summary('User registration')
     @tags(['Auth'])
     @body({
-        firstName: { type: 'string', required: true },
-        lastName: { type: 'string', required: true },
-        userName: { type: 'string', required: true },
-        email: { type: 'string', required: true },
-        password: { type: 'string', required: true },
-        birthdayDate: { type: 'string', required: true }
+        firstName: {type: 'string', required: true},
+        lastName: {type: 'string', required: true},
+        userName: {type: 'string', required: true},
+        email: {type: 'string', required: true},
+        password: {type: 'string', required: true},
+        birthdayDate: {type: 'string', required: true}
     })
     static async register(ctx: any): Promise<void> {
         try {
@@ -48,12 +49,12 @@ export class AuthRouter {
     @summary('User confirm')
     @tags(['Auth'])
     @body({
-        id: { type: 'number', required: true },
-        key: { type: 'string', required: true }
+        id: {type: 'number', required: true},
+        key: {type: 'string', required: true}
     })
-    static async gi(ctx: any): Promise<void> {
+    static async confirmRegistration(ctx: any): Promise<void> {
         try {
-            const { id, key } = ctx.validatedBody;
+            const {id, key} = ctx.validatedBody;
 
             ctx.response.body = await new AuthService()
                 .confirmRegistration(id, key);

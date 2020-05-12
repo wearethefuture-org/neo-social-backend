@@ -1,4 +1,4 @@
-import * as passport from 'koa-passport';
+import passport from 'koa-passport';
 import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt';
 import { UserService } from '../user';
 

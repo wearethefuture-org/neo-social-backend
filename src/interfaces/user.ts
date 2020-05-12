@@ -1,4 +1,5 @@
 import { USER_ROLE, USER_STATUS } from '../enums/users/constants';
+import { IChat } from './';
 
 export interface IUser {
   id: number;
@@ -10,6 +11,7 @@ export interface IUser {
   status: USER_STATUS;
   role: USER_ROLE;
   disabled: boolean;
+  chats: IChat[];
   birthdayDate: Date;
   createdAt: Date;
   updatedAt: Date;

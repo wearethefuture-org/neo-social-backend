@@ -5,7 +5,7 @@ export const aliases = {
   users: {
     usersKeys: 'usersKeys',
     usersForgotPasswords: 'usersForgotPasswords',
-    files: 'img',
+    files: 'avatar',
     comments: 'comments'
   },
   usersKeys: {

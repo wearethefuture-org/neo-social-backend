@@ -4,24 +4,27 @@
 import { envIndex } from './services/env';
 envIndex(`${__dirname}/../`);
 
-import * as Koa from 'koa';
-import * as koaBody from 'koa-body';
+/**
+ * Init platform
+ */
+import { Platform } from './platform';
+Platform.init();
 
-// tslint:disable-next-line:no-require-imports
-const cors = require('@koa/cors');
-// tslint:disable-next-line:no-require-imports
-const swagger = require('koa-swagger-decorator');
+import koaCors from '@koa/cors';
+import Koa from 'koa';
+import koaBodyparser from 'koa-bodyparser';
+import koaStatic from 'koa-static';
+
+import { SwaggerRouter } from 'koa-swagger-decorator';
 
 import { authMiddleware } from './middleware/authMiddleware';
 import { errorMiddleware } from './middleware/errorMiddleware';
+import { fileMiddleware } from './middleware/fileMiddleware';
 
 import { apiRouterV1 } from './router';
 
 const app = new Koa();
-app.use(cors());
-
-const router = new swagger.SwaggerRouter();
-router.use('/api/v1', apiRouterV1.routes());
+const router = new SwaggerRouter();
 
 router.swagger({
     title: 'API',
@@ -29,15 +32,21 @@ router.swagger({
     version: '1.0.0'
 });
 
+router.use('/api/v1', apiRouterV1.routes());
+
+app.use(koaCors());
+app.use(koaBodyparser());
+app.use(koaStatic(Platform.publicDIR));
+
 app.use(errorMiddleware);
 app.use(authMiddleware);
-app.use(koaBody());
+app.use(fileMiddleware);
+
 app.use(router.routes());
 app.use(router.allowedMethods());
 
 const PORT = process.env.PORT;
 
 app.listen(PORT, (): void => {
-    // tslint:disable-next-line:no-console
-    console.log('system', `Server started! http://127.0.0.1:${PORT}`, `On ${process.env.NODE_ENV} environment`);
+    console.info('system', `Server started! http://127.0.0.1:${PORT}`, `On ${process.env.NODE_ENV} environment`);
 });

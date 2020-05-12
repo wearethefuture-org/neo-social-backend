@@ -9,7 +9,6 @@ import { UserService } from '../user';
 import { UsersKeysService } from '../usersKeys';
 
 export class AuthService extends BaseModelService {
-
     async login(user: any): Promise<any> {
         const userService = new UserService();
         const tokenService = new TokenService();

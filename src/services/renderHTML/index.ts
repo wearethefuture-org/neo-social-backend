@@ -1,11 +1,11 @@
-// tslint:disable-next-line:no-require-imports
-const Pug = require('koa-pug');
+import koaPug, { KoaPug } from 'koa-pug';
 import * as path from 'path';
 
 export class RenderHTMLService {
-    pug: any;
+    private pug: KoaPug;
+
     constructor() {
-        this.pug = new Pug ({
+        this.pug = new koaPug({
             viewPath: path.resolve(__dirname, '../../views')
         });
     }
