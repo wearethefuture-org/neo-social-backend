@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
 
 import { aliases } from './aliases';
@@ -31,7 +32,7 @@ const sequelize: any = new Sequelize(process.env.DATABASE_NAME, process.env.POST
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-db.Op = sequelize.Op;
+db.Op = Op;
 
 relations(db);
 

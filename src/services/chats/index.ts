@@ -6,17 +6,16 @@ export class ChatsService extends BaseModelService {
         const { limit, offset, isGlobal } = params;
         const where: any = {};
 
+        // tslint:disable-next-line:prefer-conditional-expression
         if (isGlobal) {
             // tslint:disable-next-line:no-null-keyword
           where.ownerId = null;
-        }else{
-            where.ownerId = {
-                // tslint:disable-next-line:no-null-keyword
-                [this.model.Op.not]: null
-            };
+        } else{
+            where.ownerId = {[this.model.Op.eq]: null};
         }
 
         return this.model.chats.findAll({
+            where,
             limit,
             offset
         });
