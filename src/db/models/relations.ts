@@ -14,6 +14,7 @@ export const relations = (db: any): void => {
   });
 
   db.chats.belongsTo(db.users, {
+    as: db.aliases.chats.owner,
     targetKey: 'id',
     onDelete: 'cascade',
     field: 'owner_id',

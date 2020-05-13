@@ -1,6 +1,7 @@
 export const aliases = {
   chats: {
-    comments: 'comments'
+    comments: 'comments',
+    owner: 'owner'
   },
   users: {
     usersKeys: 'usersKeys',

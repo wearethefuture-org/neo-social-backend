@@ -15,6 +15,7 @@ export class ChatsService extends BaseModelService {
                 include: [
                     {
                         model: this.model.users,
+                        as: this.model.aliases.chats.owner,
                         attributes: {
                             exclude: ['password']
                         }
