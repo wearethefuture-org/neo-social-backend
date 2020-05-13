@@ -26,6 +26,9 @@ export const relations = (db: any): void => {
     foreignKey: 'avatarId'
   });
 
+  db.users.belongsToMany(db.chats, {through: db.usersChats, as: 'test'});
+  db.chats.belongsToMany(db.users, {through: db.usersChats, as: 'test2'});
+
   // db.categories.hasMany(db.subCategories, {
   //   as: db.aliases.categories.subCategories,
   //   field: 'category_id',
