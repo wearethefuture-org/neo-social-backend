@@ -32,6 +32,10 @@ export class UserService extends BaseModelService {
                 {
                     model: this.model.files,
                     as: this.aliases.users.files
+                },
+                {
+                    model: this.model.usersChats,
+                    as: this.aliases.users.chatsAtUsers
                 }
             ]
         });

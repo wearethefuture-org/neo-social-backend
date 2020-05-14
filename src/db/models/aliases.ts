@@ -1,13 +1,15 @@
 export const aliases = {
   chats: {
     comments: 'comments',
-    owner: 'owner'
+    owner: 'owner',
+    usersInChats: 'usersInChats'
   },
   users: {
     usersKeys: 'usersKeys',
     usersForgotPasswords: 'usersForgotPasswords',
     files: 'avatar',
-    comments: 'comments'
+    comments: 'comments',
+    chatsAtUsers: 'chatsAtUsers'
   },
   usersKeys: {
     users: 'users'

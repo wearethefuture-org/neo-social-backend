@@ -15,9 +15,9 @@ export const relations = (db: any): void => {
 
   db.chats.belongsTo(db.users, {
     as: db.aliases.chats.owner,
-    targetKey: 'id',
     onDelete: 'cascade',
     field: 'owner_id',
+    targetKey: 'id',
     foreignKey: 'ownerId'
   });
 
@@ -26,8 +26,19 @@ export const relations = (db: any): void => {
     foreignKey: 'avatarId'
   });
 
-  db.users.belongsToMany(db.chats, {through: db.usersChats, as: 'test'});
-  db.chats.belongsToMany(db.users, {through: db.usersChats, as: 'test2'});
+  db.users.belongsToMany(db.chats, {
+    as: db.aliases.users.chatsAtUsers,
+    field: 'user_id',
+    foreignKey: 'userId',
+    through: 'usersChats'
+  });
+
+  db.chats.belongsToMany(db.users, {
+    as: db.aliases.chats.usersInChats,
+    field: 'chat_id',
+    foreignKey: 'chatId',
+    through: 'usersChats'
+  });
 
   // db.categories.hasMany(db.subCategories, {
   //   as: db.aliases.categories.subCategories,
