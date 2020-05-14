@@ -34,7 +34,7 @@ export class UserService extends BaseModelService {
                     as: this.aliases.users.files
                 },
                 {
-                    model: this.model.usersChats,
+                    model: this.model.chats,
                     as: this.aliases.users.chatsAtUsers
                 }
             ]

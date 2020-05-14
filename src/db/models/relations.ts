@@ -25,19 +25,18 @@ export const relations = (db: any): void => {
     as: db.aliases.users.files,
     foreignKey: 'avatarId'
   });
-  // console.log('db.users', typeof db.users);
-  // console.log('db.usersChats', typeof db.usersChats);
+
   db.users.belongsToMany(db.chats, {
     as: db.aliases.users.chatsAtUsers,
     field: 'user_id',
-    foreignKey: 'user_id',
+    foreignKey: 'userId',
     through: db.usersChats
   });
 
   db.chats.belongsToMany(db.users, {
     as: db.aliases.chats.usersInChats,
     field: 'chat_id',
-    foreignKey: 'chat_id',
+    foreignKey: 'chatId',
     through: db.usersChats
   });
 
