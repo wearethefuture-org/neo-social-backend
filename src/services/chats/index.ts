@@ -19,6 +19,13 @@ export class ChatsService extends BaseModelService {
                         attributes: {
                             exclude: ['password']
                         }
+                    },
+                    {
+                      model: this.model.users,
+                      as: this.aliases.chats.usersInChats,
+                      attributes: {
+                        exclude: ['password']
+                      }
                     }
                 ]
             }

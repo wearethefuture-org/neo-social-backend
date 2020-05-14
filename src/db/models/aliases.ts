@@ -20,5 +20,7 @@ export const aliases = {
   comments: {
     user: 'user',
     chat: 'chat'
+  },
+  usersChats: {
   }
 };
