@@ -3,16 +3,10 @@ import { BaseModelService } from '../baseModel';
 
 export class ChatsService extends BaseModelService {
     async getChats(params: {limit: number, offset: number, isGlobal: boolean}): Promise<IChat[]> {
-        const { limit, offset, isGlobal } = params;
+        const { limit = 30, offset = 0, isGlobal } = params;
         const where: any = {};
 
-        if (isGlobal) {
-            where.ownerId = null;
-        }
-
-        if (!isGlobal){
-            where.ownerId = {[this.model.Op.eq]: null};
-        }
+        where.ownerId = isGlobal ? null : {[this.model.Op.ne]: null};
 
         return this.model.chats.findAll({
             where,
