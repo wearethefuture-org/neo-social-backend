@@ -10,12 +10,10 @@ envIndex(`${__dirname}/../`);
 import { Platform } from './platform';
 Platform.init();
 
+import koaCors from '@koa/cors';
 import Koa from 'koa';
-import koaBody from 'koa-body';
-import serve from 'koa-static';
-
-// tslint:disable-next-line:no-require-imports
-const cors = require('@koa/cors');
+import koaBodyparser from 'koa-bodyparser';
+import koaStatic from 'koa-static';
 
 import { SwaggerRouter } from 'koa-swagger-decorator';
 
@@ -36,10 +34,9 @@ router.swagger({
 
 router.use('/api/v1', apiRouterV1.routes());
 
-app.use(cors());
-app.use(koaBody());
-
-app.use(serve(Platform.publicDIR));
+app.use(koaCors());
+app.use(koaBodyparser());
+app.use(koaStatic(Platform.publicDIR));
 
 app.use(errorMiddleware);
 app.use(authMiddleware);
