@@ -17,11 +17,9 @@ export class ChatRouter {
         try {
             const chatsService = new ChatsService();
             const params = ctx.validatedQuery;
-            // console.log(params);
 
             ctx.response.body = await chatsService.getChats(params);
         } catch (e) {
-            // console.log(e);
             throw new HttpServerError(e);
         }
     }
