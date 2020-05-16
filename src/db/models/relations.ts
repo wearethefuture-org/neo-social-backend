@@ -14,15 +14,30 @@ export const relations = (db: any): void => {
   });
 
   db.chats.belongsTo(db.users, {
-    targetKey: 'id',
+    as: db.aliases.chats.owner,
     onDelete: 'cascade',
     field: 'owner_id',
+    targetKey: 'id',
     foreignKey: 'ownerId'
   });
 
   db.users.belongsTo(db.files, {
     as: db.aliases.users.files,
     foreignKey: 'avatarId'
+  });
+
+  db.users.belongsToMany(db.chats, {
+    as: db.aliases.users.chatsAtUsers,
+    field: 'user_id',
+    foreignKey: 'userId',
+    through: db.usersChats
+  });
+
+  db.chats.belongsToMany(db.users, {
+    as: db.aliases.chats.usersInChats,
+    field: 'chat_id',
+    foreignKey: 'chatId',
+    through: db.usersChats
   });
 
   // db.categories.hasMany(db.subCategories, {
