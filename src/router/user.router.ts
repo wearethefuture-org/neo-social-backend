@@ -113,7 +113,7 @@ export class UserRouter {
     })
     static async deleteUser(ctx: any): Promise<void> {
         try {
-            const userService = new UserService();
+            const userService =  new UserService();
             const {id} = ctx.validatedParams;
 
             ctx.response.body = await userService.deleteUser(+id);
