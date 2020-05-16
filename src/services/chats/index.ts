@@ -2,8 +2,17 @@ import { IChat } from '../../interfaces';
 import { BaseModelService } from '../baseModel';
 
 export class ChatsService extends BaseModelService {
-    async getChats(): Promise<IChat[]> {
-        return this.model.chats.findAll({});
+    async getChats(params: {limit: number, offset: number, isGlobal: boolean}): Promise<IChat[]> {
+        const { limit = 30, offset = 0, isGlobal = true } = params;
+        const where: any = {};
+
+        where.ownerId = isGlobal ? null : {[this.model.Op.ne]: null};
+
+        return this.model.chats.findAll({
+            where,
+            limit,
+            offset
+        });
     }
 
     async getChat(id: number): Promise<IChat> {

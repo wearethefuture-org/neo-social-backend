@@ -31,7 +31,7 @@
   },
   "development": {
     "username": "postgres",
-    "password": "Test1234",
+    "password": "V211992",
     "database": "social",
     "host": "127.0.0.1",
     "dialect": "postgres",
