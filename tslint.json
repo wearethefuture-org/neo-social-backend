@@ -3,7 +3,6 @@
     "backend-tslint-rules"
   ],
   "rules": {
-    "no-null-keyword": false,
     "no-default-export": false,
     "file-name-casing": [
       true,
