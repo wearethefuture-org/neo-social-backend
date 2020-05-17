@@ -71,8 +71,7 @@ export class ChatRouter {
         try {
             const chatsService = new ChatsService();
             const {id} = ctx.validatedParams;
-
-            ctx.response.body = await chatsService.deleteChat(+id);
+            ctx.response.body = await chatsService.deleteChat(+id, ctx);
         } catch (e) {
             throw new HttpServerError(e);
         }
@@ -99,7 +98,7 @@ export class ChatRouter {
             const body = ctx.validatedBody;
 
             if (!ctx.file) {
-                await chatsService.updateChat(id, body);
+                await chatsService.updateChat(id, body, ctx);
                 ctx.response.body = await chatsService.getChat(id);
 
                 return;
@@ -108,7 +107,7 @@ export class ChatRouter {
             const storageService = new StorageService();
             const file = await storageService.uploadFile(ctx.file);
 
-            await chatsService.updateChat(id, {logoId: file.id});
+            await chatsService.updateChat(id, {logoId: file.id}, ctx);
             ctx.response.body = await chatsService.getChat(id);
         } catch (e) {
             throw new HttpServerError(e);

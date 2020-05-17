@@ -1,4 +1,5 @@
 import { IChat } from '../../interfaces';
+import { HttpError } from '../../utils/httpError';
 import { BaseModelService } from '../baseModel';
 
 export class ChatsService extends BaseModelService {
@@ -35,7 +36,18 @@ export class ChatsService extends BaseModelService {
         return this.model.chats.create(newChat);
     }
 
-    async deleteChat(id: number): Promise<any> {
+    async deleteChat(id: number, ctx: any): Promise<any> {
+        const Chat = await this.model.chats.findOne(
+            {
+                where: {
+                    id
+                }
+            }
+        );
+        if (ctx.user.id !== Chat.ownerId){
+            throw new HttpError(401, 'User is not owner', 'Access denied');
+        }
+
         return this.model.chats.destroy({
             where: {
                 id
@@ -43,7 +55,18 @@ export class ChatsService extends BaseModelService {
         });
     }
 
-    async updateChat(id: number, newData: any): Promise<any> {
+    async updateChat(id: number, newData: any, ctx: any): Promise<any> {
+        const Chat = await this.model.chats.findOne(
+            {
+                where: {
+                    id
+                }
+            }
+        );
+        if (ctx.user.id !== Chat.ownerId){
+            throw new HttpError(401, 'User is not owner', 'Access denied');
+        }
+
         return this.model.chats.update(newData, {
             where: {
                 id
