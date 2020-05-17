@@ -34,4 +34,20 @@ export class ChatsService extends BaseModelService {
     async createChat(newChat: IChat): Promise<IChat> {
         return this.model.chats.create(newChat);
     }
+
+    async deleteChat(id: number): Promise<any> {
+        return this.model.chats.destroy({
+            where: {
+                id
+            }
+        });
+    }
+
+    async updateChat(id: number, newData: any): Promise<any> {
+        return this.model.chats.update(newData, {
+            where: {
+                id
+            }
+        });
+    }
 }
