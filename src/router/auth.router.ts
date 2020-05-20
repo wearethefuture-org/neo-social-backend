@@ -2,6 +2,7 @@ import { body, request, summary, tags } from 'koa-swagger-decorator';
 
 import { AuthService } from '../services/auth';
 import { HttpServerError } from '../utils/httpError';
+import { SuccessResponse } from '../utils/successResponse';
 
 export class AuthRouter {
     @request('post', '/auth/login')
@@ -14,6 +15,8 @@ export class AuthRouter {
     static async login(ctx: any): Promise<void> {
         try {
             const {email, password} = ctx.validatedBody;
+            const result = await .login();
+            ctx.response.body = new SuccessResponse(200, 'User is registered', 'Access permitted');
 
             ctx.response.body = await new AuthService()
                 .login({email, password});
@@ -36,7 +39,8 @@ export class AuthRouter {
     static async register(ctx: any): Promise<void> {
         try {
             const user = ctx.validatedBody;
-
+            const result = await .register();
+            ctx.response.body = new SuccessResponse(200, 'User is registered', 'Access permitted');
             ctx.response.status = await new AuthService()
                 .register(user)
                 .then(response => response.status);
@@ -55,6 +59,8 @@ export class AuthRouter {
     static async confirmRegistration(ctx: any): Promise<void> {
         try {
             const {id, key} = ctx.validatedBody;
+            const result = await .confirmRegistration();
+            ctx.response.body = new SuccessResponse(200, 'User is registered', 'Access permitted');
 
             ctx.response.body = await new AuthService()
                 .confirmRegistration(id, key);

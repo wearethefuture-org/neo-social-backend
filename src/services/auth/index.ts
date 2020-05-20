@@ -17,7 +17,6 @@ export class AuthService extends BaseModelService {
         if (!dbUser) {
             throw new HttpError(401, 'User is unregistered', 'Access denied');
         }
-
         const compared = await bcrypt.compare(user.password, dbUser.password);
 
         if (compared) {
