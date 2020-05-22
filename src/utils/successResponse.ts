@@ -13,16 +13,3 @@ export class SuccessResponse extends Response{
         this.status = status;
     }
 }
-
-// export const users = async (ctx: any): Promise<void> => {
-//     try {
-//         const userService = new UserService();
-//         const result = await userService.getUsers();
-
-//         ctx.response.body = result;
-//         ctx.response.status = SuccessResponse.getStatus();
-//     } catch (e) {
-//         throw new HttpError(e);
-//     }
-// tslint:disable-next-line: eofline
-// }

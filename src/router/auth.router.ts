@@ -15,11 +15,9 @@ export class AuthRouter {
     static async login(ctx: any): Promise<void> {
         try {
             const {email, password} = ctx.validatedBody;
-            const result = await .login();
-            ctx.response.body = new SuccessResponse(200, 'User is registered', 'Access permitted');
-
-            ctx.response.body = await new AuthService()
-                .login({email, password});
+            const result = await new AuthService.login({email, password});
+            ctx.response.body = new SuccessResponse(200, 'User is logged in', 'Access permitted');
+            ctx.response.body = result;
         } catch (e) {
             throw new HttpServerError(e);
         }
@@ -39,11 +37,9 @@ export class AuthRouter {
     static async register(ctx: any): Promise<void> {
         try {
             const user = ctx.validatedBody;
-            const result = await .register();
+            const result = await new AuthService.register(user);
             ctx.response.body = new SuccessResponse(200, 'User is registered', 'Access permitted');
-            ctx.response.status = await new AuthService()
-                .register(user)
-                .then(response => response.status);
+            ctx.response.body = result;
         } catch (e) {
             throw new HttpServerError(e);
         }
@@ -59,11 +55,9 @@ export class AuthRouter {
     static async confirmRegistration(ctx: any): Promise<void> {
         try {
             const {id, key} = ctx.validatedBody;
-            const result = await .confirmRegistration();
-            ctx.response.body = new SuccessResponse(200, 'User is registered', 'Access permitted');
-
-            ctx.response.body = await new AuthService()
-                .confirmRegistration(id, key);
+            const result = await new AuthService.confirmRegistration(id, key);
+            ctx.response.body = new SuccessResponse(200, 'Registration is confirmed', 'Access permitted');
+            ctx.response.body = result;
         } catch (e) {
             throw new HttpServerError(e);
         }
