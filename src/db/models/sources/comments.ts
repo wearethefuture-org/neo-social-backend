@@ -49,6 +49,18 @@ export default (sequelize: any, DataTypes: any) => {
                 type: DataTypes.DATE,
                 allowNull: true,
                 field: 'updated_at'
+            },
+            messageLikes: {
+                type: DataTypes.BIGINT,
+                allowNull: false,
+                defaultValue: 0 ,
+                field: 'Likes'
+            },
+            messageDislikes: {
+                type: DataTypes.BIGINT,
+                allowNull: false,
+                defaultValue: 0 , 
+                field: 'Dislikes'
             }
         },
         {
@@ -57,5 +69,6 @@ export default (sequelize: any, DataTypes: any) => {
             createdAt: 'created_at',
             updatedAt: true
         }
+        
     );
 };
