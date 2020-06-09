@@ -50,18 +50,19 @@ export default (sequelize: any, DataTypes: any) => {
                 allowNull: true,
                 field: 'updated_at'
             },
-            messageLikes: {
-                type: DataTypes.BIGINT,
+            likes: {
+                type: DataTypes.DATE,
                 allowNull: false,
-                defaultValue: 0 ,
-                field: 'Likes'
+                defaultValue: 0,
+                field: 'likes'
             },
-            messageDislikes: {
-                type: DataTypes.BIGINT,
+            dislikes: {
+                type: DataTypes.DATE,
                 allowNull: false,
-                defaultValue: 0 , 
-                field: 'Dislikes'
+                defaultValue: 0,
+                field: 'dislikes'
             }
+
         },
         {
             tableName: 'comments',
@@ -69,6 +70,5 @@ export default (sequelize: any, DataTypes: any) => {
             createdAt: 'created_at',
             updatedAt: true
         }
-        
     );
 };

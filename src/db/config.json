@@ -1,8 +1,8 @@
 {
   "local": {
     "username": "postgres",
-    "password": "dima2105",
-    "database": "social",
+    "password": "2311",
+    "database": "abe",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "migrationStorageTableName": "sequelize_meta",
@@ -30,9 +30,9 @@
     "logging": true
   },
   "development": {
-    "username": "alex_bezborodov",
-    "password": "dima2105",
-    "database": "social",
+    "username": "postgres",
+    "password": "2311",
+    "database": "abe",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "migrationStorageTableName": "sequelize_meta",

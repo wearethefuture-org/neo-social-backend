@@ -50,19 +50,18 @@ module.exports = {
         defaultValue: DataTypes.literal('CURRENT_TIMESTAMP'),
         field: 'updated_at'
       },
-      messageLikes: {
-        type: DataTypes.BIGINT,
+      likes: {
+        type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: 0 ,
-        field: 'Likes'
-      },
-      messageDislikes: {
-        type: DataTypes.BIGINT,
+        defaultValue: 0,
+        field: 'likes'
+    },
+    dislikes: {
+        type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: 0 , 
-        field: 'Dislikes'
-      }
-      
+        defaultValue: 0,
+        field: 'dislikes'
+    }
     }),
   down: queryInterface => queryInterface.dropTable('comments', {})
 };
